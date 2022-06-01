@@ -1,11 +1,14 @@
 package com.todayreservation.shop;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import lombok.Builder;
 
 @Entity
+@Builder
 public class Shop {
     /**
      * String title - 업체, 기관명
@@ -21,7 +24,7 @@ public class Shop {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    long id;
     String title;
     String category;
     String description;
@@ -34,7 +37,7 @@ public class Shop {
     String createdDate;
     String modifiedDate;    
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -133,8 +136,9 @@ public class Shop {
         this.title = title;
     }
 
-    public Shop(String title, String category, String description, String telephone, String link, String address,
+    public Shop(long id, String title, String category, String description, String telephone, String link, String address,
             String roadAddress, String mapx, String mapy, String createdDate, String modifiedDate) {
+        this.id = id;
         this.title = title;
         this.category = category;
         this.description = description;
@@ -146,6 +150,20 @@ public class Shop {
         this.mapy = mapy;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
+    }
+
+    public Shop(Shop params) {
+        this.title = params.getTitle();
+        this.category = params.getCategory();
+        this.description = params.getDescription();
+        this.telephone = params.getTelephone();
+        this.link = params.getLink();
+        this.address = params.getAddress();
+        this.roadAddress = params.getAddress();
+        this.mapx = params.getMapx();
+        this.mapy = params.getMapy();
+        this.createdDate = params.getCreatedDate();
+        this.modifiedDate = params.getModifiedDate();
     }
 
     @Override
